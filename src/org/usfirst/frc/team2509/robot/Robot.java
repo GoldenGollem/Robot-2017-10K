@@ -3,6 +3,7 @@ package org.usfirst.frc.team2509.robot;
 import org.usfirst.frc.team2509.robot.commands.Blue1;
 import org.usfirst.frc.team2509.robot.commands.Blue2;
 import org.usfirst.frc.team2509.robot.commands.Blue3;
+import org.usfirst.frc.team2509.robot.commands.FilterTarget;
 import org.usfirst.frc.team2509.robot.commands.GyroTurn;
 import org.usfirst.frc.team2509.robot.commands.OpDrive;
 import org.usfirst.frc.team2509.robot.commands.Red1;
@@ -35,7 +36,7 @@ public class Robot extends IterativeRobot {
     	autonomousCommand,
     	climbUp,
     	dropGear,
-    	filterGearTarget,
+    	filterTarget,
     	sweepForward,
     	gyroTurn,
     	opDrive,
@@ -86,6 +87,7 @@ public class Robot extends IterativeRobot {
         blue1 = new Blue1();
         blue2 = new Blue2();
         blue3 = new Blue3();
+        filterTarget = new FilterTarget();
         sweepForward = new SweeperForward();
         new Thread(()->{
 			while(true){
@@ -95,6 +97,7 @@ public class Robot extends IterativeRobot {
 			}
 		}).start();
         System.out.println("Robot Ready");
+        filterTarget.start();
     }
 
     /**
@@ -122,16 +125,22 @@ public class Robot extends IterativeRobot {
      */
     public void autonomousPeriodic() {
         Scheduler.getInstance().run();
-        
 		
     }
 
     public void teleopInit() {
+
+       
         // This makes sure that the autonomous stops running when
         // teleop starts running. If you want the autonomous to
         // continue until interrupted by another command, remove
         // this line or comment it out.
-        if (autonomousCommand != null) autonomousCommand.isCanceled();
+        if (autonomousCommand != null){
+        	autonomousCommand.cancel();
+
+            if(autonomousCommand.isCanceled())System.out.println("Autonomous Ended");
+        }
+        
         if(isEnabled()&&isOperatorControl()) opDrive.start();
         isTeleop = true;
     }

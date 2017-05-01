@@ -118,7 +118,7 @@ protected final Scalar
 	     	if(TARGET != null&&(Timer.getMatchTime()>0&&Timer.getMatchTime()<14.9)){
 	 			System.out.println("FOUND TARGET");
 	 			//While Target is less than 55 and in AutoTime
-	 			while(SWITCH.get()==false&&TARGET.width<35&&(Timer.getMatchTime()>0&&Timer.getMatchTime()<14.5)){
+	 			while(/*SWITCH.get()==false&&*/TARGET.width<35&&(Timer.getMatchTime()>0&&Timer.getMatchTime()<14.5)){
 	 	    		  //SmartDashboard.putBoolean("Switch", RobotMap.GEAR_SWITCH.get());
 	 	    	    	//If Target is Left of Goal move left
 	 	    			if(TARGET.x<52){
@@ -146,15 +146,16 @@ protected final Scalar
 	 	    		DT.mecanumDrive_Cartesian(0, 0.5, 0, 0);
 	 	    		Timer.delay(0.25);
 	 	    		DT.drive(0, 0);
-	     		while(SWITCH.get()==false&&(Timer.getMatchTime()>0&&Timer.getMatchTime()<14.5)){
+	     	/*	while(SWITCH.get()==false&&(Timer.getMatchTime()>0&&Timer.getMatchTime()<14.5)){
 	     			Timer.delay(0.05);
 	     			System.out.println("WAITING");
-	     		}
-	     		gearV.stop();
-	     		Timer.delay(1.5);
+	     		}*/
+	     		Timer.delay(5);
 	     		DT.mecanumDrive_Cartesian(0, -0.75, 0, 0);
 	    	    Timer.delay(0.75);
 	    	    DT.mecanumDrive_Cartesian(0, 0, 0, 0);
+
+	     		gearV.stop();
 	     	}
 	    }
 	    protected void execute() {

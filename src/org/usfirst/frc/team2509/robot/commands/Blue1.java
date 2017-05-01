@@ -108,8 +108,8 @@ public class Blue1 extends Command {
 	     	Timer.delay(1.2);
 	     	DT.drive(0, 0);
 	     	//Rotate the Robot untill GYRO reads -42 degrees
-	     	while(GYRO.getAngle()>(-45)) DT.mecanumDrive_Cartesian(0, 0, -0.4, 0);
-	     	if(GYRO.getAngle()<(-45)) DT.drive(0, 0);
+	     	while(GYRO.getAngle()<(45)) DT.mecanumDrive_Cartesian(0, 0, 0.4, 0);
+	    	if(GYRO.getAngle()>(45)) DT.drive(0, 0);
 	     	//Drive Forward @ 40% for 0.2 Seconds
 	     	DT.mecanumDrive_Cartesian(0, 0.8, 0, 0);
 	     	Timer.delay(.3);
@@ -117,10 +117,10 @@ public class Blue1 extends Command {
 	     	//Pause For 0.9 Seconds
 	     	Timer.delay(0.9);//This May Be Able To Be Shortened
 	     	//If Robot see Target Continue
-	     	if(TARGET != null&&(Timer.getMatchTime()>0&&Timer.getMatchTime()<14.9)){
+	     	if(TARGET != null&&(Timer.getMatchTime()>0&&Timer.getMatchTime()<15)){
 	 			System.out.println("FOUND TARGET");
 	 			//While Target is less than 55 and in AutoTime
-	 			while(SWITCH.get()==false&&TARGET.width<35&&(Timer.getMatchTime()>0&&Timer.getMatchTime()<14.5)){
+	 			while(/*SWITCH.get()==false&&3*/TARGET.width<35&&(Timer.getMatchTime()>0&&Timer.getMatchTime()<14.5)){
 	 	    		  //SmartDashboard.putBoolean("Switch", RobotMap.GEAR_SWITCH.get());
 	 	    	    	//If Target is Left of Goal move left
 	 	    			if(TARGET.x<52){
@@ -148,15 +148,16 @@ public class Blue1 extends Command {
 	 	    		DT.mecanumDrive_Cartesian(0, 0.5, 0, 0);
 	 	    		Timer.delay(0.25);
 	 	    		DT.drive(0, 0);
-	     		while(SWITCH.get()==false&&(Timer.getMatchTime()>0&&Timer.getMatchTime()<14.5)){
+	     	/*	while(SWITCH.get()==false&&(Timer.getMatchTime()>0&&Timer.getMatchTime()<14.5)){
 	     			Timer.delay(0.05);
 	     			System.out.println("WAITING");
-	     		}
-	     		gearV.stop();
-	     		Timer.delay(1.5);
+	     		}*/
+	     		Timer.delay(5);
 	     		DT.mecanumDrive_Cartesian(0, -0.75, 0, 0);
 	     	    Timer.delay(0.75);
 	     	    DT.mecanumDrive_Cartesian(0, 0, 0, 0);
+
+	     		gearV.stop();
 	     	}
 	    }
 	    protected void execute() {

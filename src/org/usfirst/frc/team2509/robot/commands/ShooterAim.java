@@ -8,6 +8,7 @@ import org.opencv.core.MatOfPoint;
 import org.opencv.core.Rect;
 import org.opencv.core.Scalar;
 import org.opencv.imgproc.Imgproc;
+import org.usfirst.frc.team2509.robot.Robot;
 import org.usfirst.frc.team2509.robot.RobotMap;
 
 import edu.wpi.cscore.CvSink;
@@ -100,16 +101,22 @@ public class ShooterAim extends Command {
 			}
 		}).start();
     	//Target 115
-    	if(TARGET != null){
+    	
+    		
+    }
+
+    // Called repeatedly when this Command is scheduled to run
+    protected void execute() {
+    	if(TARGET != null&&Robot.oi.OPSTICK.getRawButton(3)){
     		System.out.println("AIMING NOW");
-    		while(TARGET.x<=90||TARGET.x>=100){
-    			if(TARGET.x>98){
+    		while(TARGET.x<=90||TARGET.x>=100&&Robot.oi.OPSTICK.getRawButton(3)){
+    			if(TARGET.x>100&&Robot.oi.OPSTICK.getRawButton(3)){
     				System.out.println("To The Right");
     				DT.mecanumDrive_Cartesian(0, 0, 0.3, 0);
     				System.out.println("To The Right");
     				Timer.delay(0.1);
     				DT.drive(0, 0);
-    			}else if(TARGET.x<92){
+    			}else if(TARGET.x<90&&Robot.oi.OPSTICK.getRawButton(3)){
     				System.out.println("To The Left");
     				DT.mecanumDrive_Cartesian(0, 0, -0.3, 0);
     				System.out.println("To The Left");
@@ -118,22 +125,20 @@ public class ShooterAim extends Command {
     			}else{
     				DT.drive(0, 0);
     				System.out.println("Now Kick");
+    				end();
     			}
     		}
-    		
-    	}else{
-    		end();
     	}
-    }
-
-    // Called repeatedly when this Command is scheduled to run
-    protected void execute() {
-    	
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+    	if(Robot.oi.OPSTICK.getRawButton(3)){
+    		return false;
+    	}else{
+    		Timer.delay(2.5);
+    		return true;
+    	}
     }
 
     // Called once after isFinished returns true

@@ -43,8 +43,8 @@ public class OI {
 	public String BLUE1 = "Blue 1";
 	public String BLUE2 = "Blue 2";
 	public String BLUE3 = "Blue 3";
-	public String BLUECENTER = "Blue Center";
-	public String BLUESHOOT = "Blue Shoot";
+	public String BLUECENTER = "Blue 2S";
+	public String BLUESHOOT = "Blue 1S";
 	public String RED1 = "Red 1";
 	public String RED2  = "Red 2";
 	public String RED3 = "Red 3";
@@ -73,8 +73,8 @@ public class OI {
         CLIMB.whileHeld(new ClimbUp());
         SHOOT = new JoystickButton(OPSTICK, 1);
         SHOOT.whileHeld(new ShooterRun());
-        SHOOT_AIM = new JoystickButton(OPSTICK,3);
-        SHOOT_AIM.whileHeld(new ShooterAim());
+//        SHOOT_AIM = new JoystickButton(OPSTICK,3);
+//        SHOOT_AIM.whileHeld(new ShooterAim());
         FORWARD_SWEEP = new JoystickButton(COOPSTICK,3);
         FORWARD_SWEEP.whileHeld(new SweeperForward());
         REVERSE_SWEEP = new JoystickButton(COOPSTICK, 5);
@@ -83,9 +83,9 @@ public class OI {
         //Autonomous Chooser
         chooser.addDefault("Default Auto", defaultAuto);
 		chooser.addObject("Blue 1", BLUE1);
-		chooser.addObject("Blue 1-Shoot", BLUECENTER);
+		chooser.addObject("Blue 1-Shoot", BLUESHOOT);
 		chooser.addObject("Blue 2", BLUE2);
-		chooser.addObject("Blue 2-Shoot", BLUESHOOT);
+		chooser.addObject("Blue 2-Shoot", BLUECENTER);
 		chooser.addObject("Blue 3", BLUE3);
 		chooser.addObject("Red 1", RED1);
 		chooser.addObject("Red 2", RED2);

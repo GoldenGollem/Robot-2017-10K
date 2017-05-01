@@ -151,15 +151,16 @@ public Red2() {
 protected void initialize() {
 		gearV.start();
 		//Drive forward @ 50% for 1.05 seconds
-		DT.mecanumDrive_Cartesian(0, 0.75, 0, 0);
-		Timer.delay(0.75);
+		DT.mecanumDrive_Cartesian(0, 0.5, 0, 0);
+		Timer.delay(1.0);
 		DT.drive(0,0);
 		Timer.delay(0.75);
 		//If Robot See Target Continue
-		if(GEARTARGET != null){
+		
+		if(GEARTARGET != null&&(Timer.getMatchTime()>0&&Timer.getMatchTime()<15)){
 			System.out.println("FOUND TARGET");
 			//While Target is less than 55 and in AutoTime
-			while(SWITCH.get()==false&&GEARTARGET.width<35&&(Timer.getMatchTime()>0&&Timer.getMatchTime()<14.5)){
+			while(/*SWITCH.get()==false&&*/GEARTARGET.width<35&&(Timer.getMatchTime()>0&&Timer.getMatchTime()<14.5)){
 	    		  //SmartDashboard.putBoolean("Switch", RobotMap.GEAR_SWITCH.get());
 	    	    	//If Target is Left of Goal move left
 	    			if(GEARTARGET.x<50){
@@ -187,16 +188,15 @@ protected void initialize() {
 	    		DT.mecanumDrive_Cartesian(0, 0.5, 0, 0);
 	    		Timer.delay(0.25);
 	    		DT.drive(0, 0);
-	    		gearV.stop();
-    		while(SWITCH.get()==false&&(Timer.getMatchTime()>0&&Timer.getMatchTime()<14.9)){
+    	/*	while(SWITCH.get()==false&&(Timer.getMatchTime()>0&&Timer.getMatchTime()<14.9)){
     			Timer.delay(0.05);
     			System.out.println("WAITING");
-    		}
-    		boilerV.start();
-    		Timer.delay(1.5);
+    		}*/
+    		Timer.delay(5);
     		DT.mecanumDrive_Cartesian(0, -0.75, 0, 0);
     	    Timer.delay(0.25);
     	    DT.drive(0, 0);
+    		gearV.stop();
 		}
     }
     // Called repeatedly when this Command is scheduled to run
